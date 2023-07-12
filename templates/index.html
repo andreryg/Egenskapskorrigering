@@ -6,31 +6,43 @@
         <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
     </head>
     <body>
-        <form>
+        <form method="post">
             <div class="dank">
                 <input type="radio" id="vegkryss" name="objekt" value="1">
                 <label for="vegkryss">Vegkryss</label><br>
                 <input type="radio" id="bru" name="objekt" value="2">
                 <label for="bru">Bru</label><br>
-                <input type="radio" id="skiltplate" name="objekt" value="3">
-                <label for="skiltplate">Skiltplate</label><br>
-                <input type="radio" id="fartsgrense" name="objekt" value="4">
-                <label for="fartsgrense">Fartsgrense</label><br>
+                <input type="radio" id="avkjørsel" name="objekt" value="3">
+                <label for="avkjørsel">Avkjørsel</label><br>
             </div>
             <div class="1 box">
+                <input type="checkbox" id="type" name="objekt1" value="type">
+                <label for="type">Type</label><br>
+                <input type="checkbox" id="kryssnummer" name="objekt1" value="kryssnummer">
+                <label for="kryssnummer">Kryssnummer</label><br>
                 <input type="checkbox" id="armer" name="objekt1" value="armer">
                 <label for="armer">Armer i Rundkjøring</label><br>
                 <input type="checkbox" id="kanalisering1" name="objekt1" value="kanalisering1">
                 <label for="kanalisering1">Kanalisering primærveg</label><br>
+                <input type="checkbox" id="kanalisering2" name="objekt1" value="kanalisering2">
+                <label for="kanalisering2">Kanalisering sekundærveg</label><br>
             </div>
             <div class="2 box">
-                <input type="checkbox" id="armer" name="objekt2" value="armer">
-                <label for="armer">Armer in Rundkjøring</label><br>
-                <input type="checkbox" id="kanalisering1" name="objekt2" value="kanalisering1">
-                <label for="kanalisering1">Kanalisering primærveg</label><br>
+                <input type="checkbox" id="kategori" name="objekt2" value="kategori">
+                <label for="kategori">Brukategori</label><br>
+                <input type="checkbox" id="status" name="objekt2" value="status">
+                <label for="status">Status</label><br>
+                <input type="checkbox" id="materialtype" name="objekt2" value="materialtype">
+                <label for="materialtype">Materialtype</label><br>
+            </div>
+            <div class="3 box">
+                <input type="checkbox" id="bruksområde" name="objekt3" value="bruksområde">
+                <label for="bruksområde">Bruksområde</label><br>
+                <input type="checkbox" id="primæraktivitet" name="objekt3" value="primæraktivitet">
+                <label for="primæraktivitet">Primæraktivitet</label><br>
             </div>
             <div>
-                <button class="btn" type="button" onclick="sendData()">Ferdig</button>
+                <button class="btn" type="submit" onclick="sendData()">Ferdig</button>
             </div>
         </form>
     <script>
@@ -53,14 +65,9 @@
             console.log(objekt)
             console.log(egenskaper)
             
-            $.ajax({
-                url: '/view',
-                type: 'POST',
-                data: { 'data': objekt },
-                
-            })
-            
-            //window.location.href='{{ url_for('view') }}';
+            const request = new XMLHttpRequest()
+            request.open('POST', `/send/${objekt}`)
+            request.send()
         }
     </script>
     </body>
