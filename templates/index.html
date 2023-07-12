@@ -1,0 +1,67 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Index</title>
+        <link rel="stylesheet" href="../static/index.css">
+        <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    </head>
+    <body>
+        <form>
+            <div class="dank">
+                <input type="radio" id="vegkryss" name="objekt" value="1">
+                <label for="vegkryss">Vegkryss</label><br>
+                <input type="radio" id="bru" name="objekt" value="2">
+                <label for="bru">Bru</label><br>
+                <input type="radio" id="skiltplate" name="objekt" value="3">
+                <label for="skiltplate">Skiltplate</label><br>
+                <input type="radio" id="fartsgrense" name="objekt" value="4">
+                <label for="fartsgrense">Fartsgrense</label><br>
+            </div>
+            <div class="1 box">
+                <input type="checkbox" id="armer" name="objekt1" value="armer">
+                <label for="armer">Armer i Rundkjøring</label><br>
+                <input type="checkbox" id="kanalisering1" name="objekt1" value="kanalisering1">
+                <label for="kanalisering1">Kanalisering primærveg</label><br>
+            </div>
+            <div class="2 box">
+                <input type="checkbox" id="armer" name="objekt2" value="armer">
+                <label for="armer">Armer in Rundkjøring</label><br>
+                <input type="checkbox" id="kanalisering1" name="objekt2" value="kanalisering1">
+                <label for="kanalisering1">Kanalisering primærveg</label><br>
+            </div>
+            <div>
+                <button class="btn" type="button" onclick="sendData()">Ferdig</button>
+            </div>
+        </form>
+    <script>
+        $(document).ready(function(){
+            $('input[type="radio"]').click(function(){
+                var inputValue = $(this).attr("value");
+                var targetBox = $("." + inputValue);
+                $(".box").not(targetBox).hide();
+                $(targetBox).show();
+            })
+        })
+        function sendData() {
+            var objekt = document.querySelector('input[name="objekt"]:checked').value
+            var underegenskap = "objekt" + objekt
+            console.log(underegenskap)
+            var egenskaper = document.getElementsByName(underegenskap);
+            for (var i=0; i<egenskaper.length; i++) {
+                objekt += (egenskaper[i].checked? "1" : "0")
+            }
+            console.log(objekt)
+            console.log(egenskaper)
+            
+            $.ajax({
+                url: '/view',
+                type: 'POST',
+                data: { 'data': objekt },
+                
+            })
+            
+            //window.location.href='{{ url_for('view') }}';
+        }
+    </script>
+    </body>
+</html>

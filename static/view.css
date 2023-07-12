@@ -1,0 +1,35 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Mon Jul  3 12:34:34 2023
+
+@author: andryg
+"""
+
+div.upper, div.lower {
+    position: absolute;
+    left: 0;
+    right: 0;
+    outline: solid 10px #ccc;
+    margin: 5px
+}
+div.upper {
+    height: 100px;
+    top: 0;
+}
+div.lower {
+    bottom: 0;
+    height: 820px;
+}
+div.first{
+     position:absolute;
+     border:1px solid red;
+     text-align:center;
+     width:100%
+}
+div.second, div.third{
+    text-align:center;
+    width:100%;
+    height:30px;
+	position: relative;
+	top:40px;
+}

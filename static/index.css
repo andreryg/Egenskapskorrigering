@@ -1,0 +1,17 @@
+.btn {
+    height: 100px;
+    background-color: #ABBAEA;
+    width: 100%;
+    font-size: 24px;
+    font-family: Candara;
+    font-weight: bold;
+}
+
+.dank {
+    height: 100px;
+    background-color: #EBEBEB
+}
+
+.box {
+    display: none;
+}
