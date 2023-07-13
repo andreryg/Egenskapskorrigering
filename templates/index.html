@@ -8,40 +8,42 @@
     <body>
         <form method="post">
             <div class="dank">
-                <input type="radio" id="vegkryss" name="objekt" value="1">
+                <input type="radio" id="vegkryss" name="objekt" value="0">
                 <label for="vegkryss">Vegkryss</label><br>
-                <input type="radio" id="bru" name="objekt" value="2">
+                <input type="radio" id="bru" name="objekt" value="1">
                 <label for="bru">Bru</label><br>
-                <input type="radio" id="avkjørsel" name="objekt" value="3">
+                <input type="radio" id="avkjørsel" name="objekt" value="2">
                 <label for="avkjørsel">Avkjørsel</label><br>
             </div>
-            <div class="1 box">
-                <input type="checkbox" id="type" name="objekt1" value="type">
+            <div class="0 box">
+                <input type="checkbox" id="type" name="objekt0" value="type">
                 <label for="type">Type</label><br>
-                <input type="checkbox" id="kryssnummer" name="objekt1" value="kryssnummer">
+                <input type="checkbox" id="kryssnummer" name="objekt0" value="kryssnummer">
                 <label for="kryssnummer">Kryssnummer</label><br>
-                <input type="checkbox" id="armer" name="objekt1" value="armer">
+                <input type="checkbox" id="armer" name="objekt0" value="armer">
                 <label for="armer">Armer i Rundkjøring</label><br>
-                <input type="checkbox" id="kanalisering1" name="objekt1" value="kanalisering1">
+                <input type="checkbox" id="kanalisering1" name="objekt0" value="kanalisering1">
                 <label for="kanalisering1">Kanalisering primærveg</label><br>
-                <input type="checkbox" id="kanalisering2" name="objekt1" value="kanalisering2">
+                <input type="checkbox" id="kanalisering2" name="objekt0" value="kanalisering2">
                 <label for="kanalisering2">Kanalisering sekundærveg</label><br>
             </div>
-            <div class="2 box">
-                <input type="checkbox" id="kategori" name="objekt2" value="kategori">
+            <div class="1 box">
+                <input type="checkbox" id="kategori" name="objekt1" value="kategori">
                 <label for="kategori">Brukategori</label><br>
-                <input type="checkbox" id="status" name="objekt2" value="status">
+                <input type="checkbox" id="status" name="objekt1" value="status">
                 <label for="status">Status</label><br>
-                <input type="checkbox" id="materialtype" name="objekt2" value="materialtype">
+                <input type="checkbox" id="materialtype" name="objekt1" value="materialtype">
                 <label for="materialtype">Materialtype</label><br>
             </div>
-            <div class="3 box">
-                <input type="checkbox" id="bruksområde" name="objekt3" value="bruksområde">
+            <div class="2 box">
+                <input type="checkbox" id="bruksområde" name="objekt2" value="bruksområde">
                 <label for="bruksområde">Bruksområde</label><br>
-                <input type="checkbox" id="primæraktivitet" name="objekt3" value="primæraktivitet">
+                <input type="checkbox" id="primæraktivitet" name="objekt2" value="primæraktivitet">
                 <label for="primæraktivitet">Primæraktivitet</label><br>
             </div>
             <div>
+                <label for="filter">Filter:</label>
+                <input type="text" id="filter" name="filter"><br>
                 <button class="btn" type="submit" onclick="sendData()">Ferdig</button>
             </div>
         </form>

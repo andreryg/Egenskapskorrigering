@@ -5,10 +5,15 @@ Created on Wed Jul 12 09:01:47 2023
 @author: andryg
 """
 
-from flask import Flask, render_template, request, redirect, url_for
-import json
+from flask import Flask, render_template, request, redirect, url_for, session
+import nvdbapiv3
+import pandas as pd
+from flask_session import Session
 
 app = Flask(__name__)
+app.config["SESSION_PERMANENT"] = False
+app.config["SESSION_TYPE"] = "filesystem"
+Session(app)
 
 @app.route('/')
 def home():
@@ -22,12 +27,27 @@ def send(objekt):
 
 @app.route('/', methods=['POST', 'GET'])
 def getData():
+    nvdbObjekter = [37, 60, 46] #ADD NVDB ID
+    print('egenskap:'+request.form['filter'])
+    objekter = nvdbapiv3.nvdbFagdata((nvdbObjekter[int(request.form['objekt'])]))
+    objekter.filter({'egenskap':request.form['filter']})
+    objekterDF = pd.DataFrame(objekter.to_records())
+    #objekterDF = objekterDF.assign(geometri = lambda x: str(x['geometri']).strip("POINTZ()")[3:].split(" "))
+    #print(objekterDF.columns.values.tolist())
+    objekter_array = objekterDF[['nvdbId', 'versjon', 'startdato', 'geometri']].to_numpy()
+    for x in objekter_array:
+        x[-1] = x[-1].strip("POINTZ()")[3:].split(" ")[0:2]
+    print(objekter_array)
     objekt = "objekt" + request.form['objekt']
     egenskaper = request.form.getlist(objekt)
+    session["egenskaper"] = egenskaper
+    session["objekter"] = objekter_array
     if request.method == "POST":
         return redirect(url_for('view'))
     
 @app.route('/view')
 def view():
-    print(("dddddd"))
-    return render_template('view.html')
+    objekter = session["objekter"]
+    egenskaper = session["egenskaper"]
+    session.clear()
+    return render_template('view.html', objekter=objekter, egenskaper=egenskaper)

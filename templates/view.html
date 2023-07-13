@@ -19,11 +19,16 @@
         <div class=lower>
             <iframe id="Kart" width="100%" height="100%" bottom="0"></iframe>
         </div>
-        <script src="koordinater.js"></script>
-        <script type = "text/javascript">            
+        <script type = "text/javascript">
+            var egenskaper = '{{ egenskaper }}'
+            console.log('{{ objekter }}')
             let i = localStorage.getItem("i") ? Number(localStorage.getItem("i")) : 0;
-            var link = `https://vegkart.atlas.vegvesen.no/#kartlag:nib/@${koordinater[i][0]},${koordinater[i][1]},16/hva:!(id~49)~/valgt:${koordinater[i][2]}:37~/vegnett:metrering~+(detaljniva~!VT)~`;
+            var objekt = '{{ objekter[i] }}'
+            console.log(objekt)
+            const nvdbObjekter = [`16/hva:!(id~49)~/valgt:${objekt[0]}:37~/vegnett:metrering~+(detaljniva~!VT)`, 60, 46]
+            var link = `https://vegkart.atlas.vegvesen.no/#kartlag:nib/@${objekt[-1][0]},${objekt[-1][1]},${nvdbObjekter[egenskaper[0]]}~`;
             const Kart = document.getElementById("Kart");
+            console.log(link)
             
             Kart.src = link
             
