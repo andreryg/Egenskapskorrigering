@@ -9,6 +9,7 @@ from flask import Flask, render_template, request, redirect, url_for, session
 import nvdbapiv3
 import pandas as pd
 from flask_session import Session
+import json
 
 app = Flask(__name__)
 app.config["SESSION_PERMANENT"] = False
@@ -27,6 +28,7 @@ def send(objekt):
 
 @app.route('/', methods=['POST', 'GET'])
 def getData():
+    session.clear()
     nvdbObjekter = [37, 60, 46] #ADD NVDB ID
     print('egenskap:'+request.form['filter'])
     objekter = nvdbapiv3.nvdbFagdata((nvdbObjekter[int(request.form['objekt'])]))
@@ -37,9 +39,9 @@ def getData():
     objekter_array = objekterDF[['nvdbId', 'versjon', 'startdato', 'geometri']].to_numpy()
     for x in objekter_array:
         x[-1] = x[-1].strip("POINTZ()")[3:].split(" ")[0:2]
-    print(objekter_array)
     objekt = "objekt" + request.form['objekt']
-    egenskaper = request.form.getlist(objekt)
+    egenskaper = [request.form['objekt']]
+    egenskaper += request.form.getlist(objekt)
     session["egenskaper"] = egenskaper
     session["objekter"] = objekter_array
     if request.method == "POST":
@@ -49,5 +51,7 @@ def getData():
 def view():
     objekter = session["objekter"]
     egenskaper = session["egenskaper"]
-    session.clear()
-    return render_template('view.html', objekter=objekter, egenskaper=egenskaper)
+    print(egenskaper)
+    egenskaper_dict = {"kanalisering1":0, "kanalisering2":0, "armer":2, "kryssnummer":2, "type":0}
+    
+    return render_template('view.html', objekter=json.dumps({'list':objekter.tolist()}), egenskaper=egenskaper, egeskaper_dict = egenskaper_dict)

@@ -20,20 +20,33 @@
             <iframe id="Kart" width="100%" height="100%" bottom="0"></iframe>
         </div>
         <script type = "text/javascript">
+            var egenskaper_dict = JSON.parse('{{ egenskaper_dict }}')
+            console.log(egenskaper_dict)
+            console.log(typeof egenskaper_dict)
             var egenskaper = '{{ egenskaper }}'
-            console.log('{{ objekter }}')
+            var egenskaper = egenskaper.replaceAll("&#39;", '"')
+            console.log(egenskaper)
+            var egenskaper = eval(egenskaper) 
+            var objekter = '{{ objekter }}'
+            var objekter = objekter.replaceAll("&#34;", '').replaceAll("{list: ", '').replaceAll("}", '').replaceAll(" ", '')
+            var objekter = eval(objekter)
+            
             let i = localStorage.getItem("i") ? Number(localStorage.getItem("i")) : 0;
-            var objekt = '{{ objekter[i] }}'
-            console.log(objekt)
-            const nvdbObjekter = [`16/hva:!(id~49)~/valgt:${objekt[0]}:37~/vegnett:metrering~+(detaljniva~!VT)`, 60, 46]
-            var link = `https://vegkart.atlas.vegvesen.no/#kartlag:nib/@${objekt[-1][0]},${objekt[-1][1]},${nvdbObjekter[egenskaper[0]]}~`;
+            const nvdbObjekter = [
+                `16/hva:!(id~49)~/valgt:${objekter[i][0]}:37~/vegnett:metrering~+(detaljniva~!VT)`, 
+                `16/valgt:${objekter[i][0]}:60`,
+                `16/hva:!(id~46)~/vegnett:metrering~+(detaljniva~!VT)~/valgt:${objekter[i][0]}:46`
+                ]
+            console.log(nvdbObjekter)
+            console.log(typeof egenskaper)
+            console.log(egenskaper)
+            var link = `https://vegkart.atlas.vegvesen.no/#kartlag:nib/@${objekter[i][3][0]},${objekter[i][3][1]},${nvdbObjekter[egenskaper[0]]}~`;
             const Kart = document.getElementById("Kart");
             console.log(link)
             
             Kart.src = link
             
             k2 = document.getElementById("armverdi")
-            //console.log(kanalisering)
             
 
             function ClearStorage() {
@@ -44,7 +57,7 @@
             function Open() {
                 if (k2.value != "") {
                     var armer = localStorage.getItem("armer") ? JSON.parse(localStorage.getItem("armer")) : []
-                    armer.push([koordinater[i][2], k2.value])
+                    armer.push([objekter[i][0], k2.value])
                     localStorage.setItem("armer", JSON.stringify(armer))
                     console.log(armer)
                     
@@ -52,7 +65,7 @@
                     localStorage.setItem("i", i)
                     console.log(i)
                 
-                    link = `https://vegkart.atlas.vegvesen.no/#kartlag:nib/@${koordinater[i][0]},${koordinater[i][1]},16/hva:!(id~49)~/valgt:${koordinater[i][2]}:37~/vegnett:metrering~+(detaljniva~!VT)~`;
+                    link = `https://vegkart.atlas.vegvesen.no/#kartlag:nib/@${objekter[i][3][0]},${objekter[i][3][1]},${nvdbObjekter[egenskaper[0]]}~`;
                     Kart.src = link
                     location.reload()
                     
