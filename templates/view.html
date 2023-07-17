@@ -56,7 +56,10 @@
                 kryssnummber: 'addLabel(" Kryssnummber: "); addIntInput(1, 1000, "kryssnummer")',
                 armer: 'addLabel(" Armer i rundkjøring: "); addIntInput(1, 8, "armer")',
                 kanalisering1: 'addLabel(" Kanalisering primærveg: ");addSelectInput(["Ingen", "Malt", "Fysisk m kantstein"], "kanalisering1")',
-                kanalisering2: 'addLabel(" Kanalisering sekundærveger: ");addSelectInput(["Ingen", "Malt", "Fysisk m kantstein", "Ulik kanalisering"], "kanalisering2")'
+                kanalisering2: 'addLabel(" Kanalisering sekundærveger: ");addSelectInput(["Ingen", "Malt", "Fysisk m kantstein", "Ulik kanalisering"], "kanalisering2")',
+                bruksområde: 'addLabel(" Bruksområde: ");addSelectInput(["-Ingen-", "Bolig", "Hytte", "Gardsbruk", "Dyrkamark/jordbruk", "Skog/skogbruk", "Forretning", "Industri", "Service", "Skole/Barnehage", "Fritidsaktivitet", "Naust"], "bruksområde")',
+                primæraktivitet: 'addLabel(" Primæraktivitet: ");addSelectInput(["-Ingen-", "1-2leiligheter", "3-5 leiligheter", "6-10 leiligheter", "> 10 leiligheter", "1-2 hytter", "3-5 hytter", "> 5 hytter", "1 gardsbruk i drift", "2-3 gardsbruk i drift", "Nedlagt gardsbruk", "Beiteområde/dyrehold", "Jord/grustak", "Grustak/steinbrudd", "Tømmeropplagring/velteplass", "Liten forretning", "Middels landhandel", "Stort forretningssenter", "Kiosk/gatekjøkken", "Hotell < 50 plasser", "Hotell > 50 plasser", "Bensinstasjon, bilverksted", "Sykehus < 50 plasser", "Sykehus > 50 plasser", "Kirke/menighet/gravplass", "Samfunnshus/grendahus", "Stoppested kollektivtrafikk", "Parkering", "Utfartsplass, skitrekk", "Fritid, kino", "Lekeplass/løkke"], "primæraktivitet")',   
+                fartsgrense: 'addLabel(" Fartsgrense: ");addSelectInput([5, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120], "fartsgrense")',
             };
             
             var egenskaper = '{{ egenskaper }}'
@@ -77,8 +80,8 @@
             let i = localStorage.getItem("i") ? Number(localStorage.getItem("i")) : 0;
             const nvdbObjekter = [
                 `16/hva:!(id~49)~/valgt:${objekter[i][0]}:37~/vegnett:metrering~+(detaljniva~!VT)`, 
-                `16/valgt:${objekter[i][0]}:60`,
-                `16/hva:!(id~46)~/vegnett:metrering~+(detaljniva~!VT)~/valgt:${objekter[i][0]}:46`
+                `16/hva:!(id~46)~/vegnett:metrering~+(detaljniva~!VT)~/valgt:${objekter[i][0]}:46`,
+                `16/hva:!(id~105)~/vegnett:metrering~+(detaljniva~!VT)~/valgt:${objekter[i][0]}:105`
                 ]
             console.log(nvdbObjekter)
             console.log(typeof egenskaper)

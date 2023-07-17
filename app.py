@@ -29,7 +29,7 @@ def send(objekt):
 @app.route('/', methods=['POST', 'GET'])
 def getData():
     session.clear()
-    nvdbObjekter = [37, 60, 46] #ADD NVDB ID
+    nvdbObjekter = [37, 46, 105] #ADD NVDB ID
     print('egenskap:'+request.form['filter'])
     objekter = nvdbapiv3.nvdbFagdata((nvdbObjekter[int(request.form['objekt'])]))
     objekter.filter({'egenskap':request.form['filter']})
@@ -51,7 +51,5 @@ def getData():
 def view():
     objekter = session["objekter"]
     egenskaper = session["egenskaper"]
-    print(egenskaper)
-    egenskaper_dict = {"kanalisering1":0, "kanalisering2":0, "armer":2, "kryssnummer":2, "type":0}
     
-    return render_template('view.html', objekter=json.dumps({'list':objekter.tolist()}), egenskaper=egenskaper, egeskaper_dict = egenskaper_dict)
+    return render_template('view.html', objekter=json.dumps({'list':objekter.tolist()}), egenskaper=egenskaper)
