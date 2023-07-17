@@ -10,7 +10,7 @@ import nvdbapiv3
 import pandas as pd
 from flask_session import Session
 import json
-
+        
 app = Flask(__name__)
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
