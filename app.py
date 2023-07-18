@@ -32,6 +32,12 @@ def getData():
     nvdbObjekter = [37, 46, 103] #ADD NVDB ID
     print('egenskap:'+request.form['filter'])
     objekter = nvdbapiv3.nvdbFagdata((nvdbObjekter[int(request.form['objekt'])]))
+    
+    if request.form['kommune'] != "":
+        objekter.filter({'kommune':int(request.form['kommune'])})
+    elif request.form['fylke'] != "0":
+        objekter.filter({'fylke':int(request.form['fylke'])})
+        
     objekter.filter({'egenskap':request.form['filter']})
     objekterDF = pd.DataFrame(objekter.to_records())
     #objekterDF = objekterDF.assign(geometri = lambda x: str(x['geometri']).strip("POINTZ()")[3:].split(" "))
