@@ -29,7 +29,7 @@ def send(objekt):
 @app.route('/', methods=['POST', 'GET'])
 def getData():
     session.clear()
-    nvdbObjekter = [37, 46, 105] #ADD NVDB ID
+    nvdbObjekter = [37, 46, 103] #ADD NVDB ID
     print('egenskap:'+request.form['filter'])
     objekter = nvdbapiv3.nvdbFagdata((nvdbObjekter[int(request.form['objekt'])]))
     objekter.filter({'egenskap':request.form['filter']})
