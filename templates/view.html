@@ -29,7 +29,7 @@
                 x.setAttribute('min', min);
                 x.setAttribute('max', max);
                 x.setAttribute('id', id);
-                x.setAttribute('onkeyup', `if(parseInt(this.value)>8){this.value = ${max};} else if(parseInt(this.value)<${min}){this.value = 1;}`)
+                x.setAttribute('onkeyup', `if(parseInt(this.value)>${max}){this.value = ${max};} else if(parseInt(this.value)<${min}){this.value = ${min};}`)
                 document.getElementById('egenskaper').appendChild(x)
             }
             function addSelectInput(list_of_selects, id){
@@ -53,7 +53,7 @@
             
             let egenskaperForm = {
                 vegkryss_type: 'addLabel(" Type: ");addSelectInput(["Plankryss", "T-kryss", "X-kryss", "Rundkjøring", "Planskilt kryss", "Planskilt kryss, trompetkryss", "Planskilt kryss, ruterkryss", "Planskilt kryss, kløverbladkryss", "Planskilt kryss, hankkryss"], "type")',
-                kryssnummber: 'addLabel(" Kryssnummber: "); addIntInput(1, 1000, "kryssnummer")',
+                kryssnummer: 'addLabel(" Kryssnummer: "); addIntInput(1, 1000, "kryssnummer")',
                 armer: 'addLabel(" Armer i rundkjøring: "); addIntInput(1, 8, "armer")',
                 kanalisering1: 'addLabel(" Kanalisering primærveg: ");addSelectInput(["Ingen", "Malt", "Fysisk m kantstein"], "kanalisering1")',
                 kanalisering2: 'addLabel(" Kanalisering sekundærveger: ");addSelectInput(["Ingen", "Malt", "Fysisk m kantstein", "Ulik kanalisering"], "kanalisering2")',
@@ -102,7 +102,7 @@
             }
             function Next() {
                 var verdier = localStorage.getItem("verdier") ? JSON.parse(localStorage.getItem("verdier")) : []
-                dette_objekt = [objekter[i][0]]
+                dette_objekt = [objekter[i][0], objekter[i][1], objekter[i][2]]
                 for(var k = 1; k < egenskaper.length; k++){
                     dette_objekt.push(document.getElementById(egenskaper[k]).value)
                 }
