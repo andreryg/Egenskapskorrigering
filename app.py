@@ -37,8 +37,8 @@ def getData():
         objekter.filter({'kommune':int(request.form['kommune'])})
     elif request.form['fylke'] != "0":
         objekter.filter({'fylke':int(request.form['fylke'])})
-        
-    objekter.filter({'egenskap':request.form['filter']})
+    if request.form['filter'] != "":
+        objekter.filter({'egenskap':request.form['filter']})
     objekterDF = pd.DataFrame(objekter.to_records())
     #objekterDF = objekterDF.assign(geometri = lambda x: str(x['geometri']).strip("POINTZ()")[3:].split(" "))
     #print(objekterDF.columns.values.tolist())
