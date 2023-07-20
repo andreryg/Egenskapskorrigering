@@ -8,7 +8,7 @@
         <div class=upper>
             <div class=first>
                 <button onclick = "Next();">Neste</button>
-                <button onclick = "Save()">Lagre</button>
+                <button class="btn" type="submit" onclick = "createJSON()">Lagre</button>
                 <button onclick = "ClearStorage();">Clear local storage</button>
             </div>
             <div class=second>
@@ -125,7 +125,7 @@
                     Next();
                 }
             })
-            function Save() {
+            function createJSON() {
                 var verdier = localStorage.getItem("verdier") ? JSON.parse(localStorage.getItem("verdier")) : []
                 const link = document.createElement("a")
                 const file = new Blob([JSON.stringify(verdier)], { type: 'text/plain' })
@@ -133,6 +133,21 @@
                 link.download = "verdier.txt"
                 link.click()
                 URL.revokeObjectURL(link.href)
+                
+                fetch('/view', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({data: verdier})
+                })
+                .then(response => response.text())
+                .then(result => {
+                    console.log(result);
+                })
+                .catch(error => {
+                    console.log('Error: ', error)
+                })
             }
             window.addEventListener("keypress", function(event) {
                 if (event.key === "Enter") {
