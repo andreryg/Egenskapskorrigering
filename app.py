@@ -37,11 +37,14 @@ def getData():
         objekter.filter({'kommune':int(request.form['kommune'])})
     elif request.form['fylke'] != "0":
         objekter.filter({'fylke':int(request.form['fylke'])})
+    if request.form['vegkategori'] != "0":
+        objekter.filter({'vegsystemreferanse':request.form['vegkategori']+request.form['vegnummer']})
     if request.form['filter'] != "":
         objekter.filter({'egenskap':request.form['filter']})
-    objekterDF = pd.DataFrame(objekter.to_records())
+    objekterDF = pd.DataFrame(objekter.to_records()).sort_values(by=['vref']).reset_index(drop=True)
+    print(objekterDF['vegkategori'].head())
     #objekterDF = objekterDF.assign(geometri = lambda x: str(x['geometri']).strip("POINTZ()")[3:].split(" "))
-    #print(objekterDF.columns.values.tolist())
+    print(objekterDF.columns.values.tolist())
     objekter_array = objekterDF[['nvdbId', 'versjon', 'startdato', 'geometri']].to_numpy()
     for x in objekter_array:
         x[-1] = x[-1].strip("POINTZ()")[3:].split(" ")[0:2]
