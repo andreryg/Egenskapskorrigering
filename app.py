@@ -65,5 +65,8 @@ def view():
 @app.route('/view', methods=['POST', 'GET'])
 def createJSON():
     session.clear()
-    data = request.json['data']
+    print("inside function")
+    data = request.form["JSvar"]
     print(data)
+    
+    return render_template('index.html')

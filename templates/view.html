@@ -8,14 +8,18 @@
         <div class=upper>
             <div class=first>
                 <button onclick = "Next();">Neste</button>
-                <button class="btn" type="submit" onclick = "createJSON()">Lagre</button>
-                <button onclick = "ClearStorage();">Clear local storage</button>
+                <form id="JSdata" action="/view" method="post">
+                    <input type="hidden" name="JSvar" id="JSvar" value="" />
+                    <button class="btn" type="submit">Lagre</button>
+                </form>    
+                
             </div>
             <div class=second>
-                <form method="post">
+                <form>
                     <div id="egenskaper">
                         
                     </div>
+                    <button onclick = "ClearStorage();">Clear local storage</button>
                 </form>
             </div>
         </div>
@@ -94,6 +98,14 @@
             console.log(link)
             
             Kart.src = link    
+            
+            var form = document.getElementById("JSdata")
+            var input = document.getElementById("JSvar")
+            form.addEventListener('submit', function(e){
+                var verdier = localStorage.getItem("verdier") ? JSON.parse(localStorage.getItem("verdier")) : []
+                input.value = JSON.stringify(verdier)
+                form.submit()
+            })
 
             function ClearStorage() {
                 console.log("Cleared")
@@ -108,8 +120,7 @@
                 }
                 verdier.push(dette_objekt)
                 localStorage.setItem("verdier", JSON.stringify(verdier))
-                console.log(verdier)
-                
+
                 ++i;
                 localStorage.setItem("i", i)
                 console.log(i)
@@ -118,13 +129,6 @@
                 Kart.src = link
                 location.reload()
             }
-            var input = document.getElementById("armverdi");
-            input.addEventListener("keypress", function(event) {
-                if (event.key === "Enter") {
-                    event.preventDefault();
-                    Next();
-                }
-            })
             function createJSON() {
                 var verdier = localStorage.getItem("verdier") ? JSON.parse(localStorage.getItem("verdier")) : []
                 const link = document.createElement("a")
@@ -134,20 +138,6 @@
                 link.click()
                 URL.revokeObjectURL(link.href)
                 
-                fetch('/view', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({data: verdier})
-                })
-                .then(response => response.text())
-                .then(result => {
-                    console.log(result);
-                })
-                .catch(error => {
-                    console.log('Error: ', error)
-                })
             }
             window.addEventListener("keypress", function(event) {
                 if (event.key === "Enter") {
