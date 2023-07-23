@@ -56,7 +56,7 @@
             }
             
             let egenskaperForm = {
-                vegkryss_type: 'addLabel(" Type: ");addSelectInput(["Plankryss", "T-kryss", "X-kryss", "Rundkjøring", "Planskilt kryss", "Planskilt kryss, trompetkryss", "Planskilt kryss, ruterkryss", "Planskilt kryss, kløverbladkryss", "Planskilt kryss, hankkryss"], "type")',
+                vegkryss_type: 'addLabel(" Type: ");addSelectInput(["Plankryss", "T-kryss", "X-kryss", "Rundkjøring", "Planskilt kryss", "Planskilt kryss, trompetkryss", "Planskilt kryss, ruterkryss", "Planskilt kryss, kløverbladkryss", "Planskilt kryss, hankkryss"], "vegkryss_type")',
                 kryssnummer: 'addLabel(" Kryssnummer: "); addIntInput(1, 1000, "kryssnummer")',
                 armer: 'addLabel(" Armer i rundkjøring: "); addIntInput(1, 8, "armer")',
                 kanalisering1: 'addLabel(" Kanalisering primærveg: ");addSelectInput(["Ingen", "Malt", "Fysisk m kantstein"], "kanalisering1")',
@@ -66,6 +66,18 @@
                 fartsdemper_type: 'addLabel(" Type: ");addSelectInput(["Fartshump", "Fartsputer", "Busshump", "Trafikkøy", "Innsnevring", "Sideforskyvning", "Innsnevring og sideforskyvning", "Rumlefelt", "Fortausutvidelse i kryss", "Fartsdump"], "fartsdemper_type")',
                 materiale: 'addLabel("Materiale/belegning");addSelectInput(["Stein, brostein", "Asfalt", "Betongstein", "Betong, prefabrikkert"], "materiale")',
             };
+
+            let egenskaperIdForm = {
+                vegkryss_type: '1114',
+                kryssnummer: '7822',
+                armer: '1789',
+                kanalisering1: '1788',
+                kanalisering2: '2080',
+                bruksområde: '1256',
+                primæraktivitet: '1824',
+                fartsdemper_type: '1156',
+                materiale: '8798'
+            }
             
             var egenskaper = '{{ egenskaper }}'
             var egenskaper = egenskaper.replaceAll("&#39;", '"')
@@ -79,9 +91,8 @@
             
             
             var objekter = '{{ objekter }}'
-            var objekter = objekter.replaceAll("&#34;", '').replaceAll("{list: ", '').replaceAll("}", '').replaceAll(" ", '')
-            var objekter = eval(objekter)
-            console.log(objekter)
+            objekter = objekter.replaceAll("&#34;", '').replaceAll("{list: ", '').replaceAll("}", '').replaceAll(" ", '')
+            objekter = objekter.split("],[").map((value) => value.replaceAll("]", '').replaceAll("[", '').split(","))
             
             let i = localStorage.getItem("i") ? Number(localStorage.getItem("i")) : 0;
             
@@ -94,7 +105,7 @@
             console.log(nvdbObjekter)
             console.log(typeof egenskaper)
             console.log(egenskaper)
-            var link = `https://vegkart.atlas.vegvesen.no/#kartlag:nib/@${objekter[i][3][0]},${objekter[i][3][1]},${nvdbObjekter[egenskaper[0]]}~`;
+            var link = `https://vegkart.atlas.vegvesen.no/#kartlag:nib/@${objekter[i][3]},${objekter[i][4]},${nvdbObjekter[egenskaper[0]]}~`;
             const Kart = document.getElementById("Kart");
             console.log(link)
             
@@ -104,6 +115,11 @@
             var input = document.getElementById("JSvar")
             form.addEventListener('submit', function(e){
                 var verdier = localStorage.getItem("verdier") ? JSON.parse(localStorage.getItem("verdier")) : []
+                var l = []
+                for(var k=1; k<egenskaper.length; k++){
+                    l.push(egenskaperIdForm[egenskaper[k]])
+                }
+                verdier.unshift(l)
                 input.value = JSON.stringify(verdier)
                 form.submit()
             })
@@ -126,7 +142,7 @@
                 localStorage.setItem("i", i)
                 console.log(i)
             
-                link = `https://vegkart.atlas.vegvesen.no/#kartlag:nib/@${objekter[i][3][0]},${objekter[i][3][1]},${nvdbObjekter[egenskaper[0]]}~`;
+                link = `https://vegkart.atlas.vegvesen.no/#kartlag:nib/@${objekter[i][3]},${objekter[i][4]},${nvdbObjekter[egenskaper[0]]}~`;
                 Kart.src = link
                 location.reload()
             }
