@@ -16,6 +16,7 @@ app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
+
 @app.route('/')
 def home():
     return render_template('index.html')
@@ -45,8 +46,10 @@ def getData():
     #objekterDF = objekterDF.assign(geometri = lambda x: str(x['geometri']).strip("POINTZ()")[3:].split(" "))
     print(objekterDF.columns.values.tolist())
     objekter_array = objekterDF[['nvdbId', 'versjon', 'startdato', 'geometri']].to_numpy()
+    
     for x in objekter_array:
         x[-1] = x[-1].strip("POINTZ()")[3:].split(" ")[0:2]
+    print(objekter_array[0])
     objekt = "objekt" + request.form['objekt']
     egenskaper = [request.form['objekt']]
     egenskaper += request.form.getlist(objekt)
@@ -66,7 +69,10 @@ def view():
 def createJSON():
     session.clear()
     print("inside function")
-    data = request.form["JSvar"]
+    data = eval(request.form["JSvar"])
     print(data)
     
-    return render_template('index.html')
+    return redirect('/')
+
+if __name__=="__main__":
+    app.run(debug=True)

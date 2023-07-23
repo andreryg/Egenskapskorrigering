@@ -81,6 +81,7 @@
             var objekter = '{{ objekter }}'
             var objekter = objekter.replaceAll("&#34;", '').replaceAll("{list: ", '').replaceAll("}", '').replaceAll(" ", '')
             var objekter = eval(objekter)
+            console.log(objekter)
             
             let i = localStorage.getItem("i") ? Number(localStorage.getItem("i")) : 0;
             
