@@ -1,16 +1,11 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Mon Jul  3 12:34:34 2023
-
-@author: andryg
-"""
-
+html, body {
+    margin: 0;
+    padding: 0;
+}
 div.upper, div.lower {
     position: absolute;
-    left: 0;
+    width: 93%;
     right: 0;
-    outline: solid 10px #ccc;
-    margin: 5px
 }
 div.upper {
     height: 100px;
@@ -19,6 +14,13 @@ div.upper {
 div.lower {
     bottom: 0;
     height: 820px;
+
+    section{
+        display: none;
+        &.show{
+            display: table-cell;
+        }
+    }
 }
 div.first{
      position:absolute;
@@ -32,4 +34,27 @@ div.second, div.third{
     height:30px;
 	position: relative;
 	top:40px;
+}
+.sidebar {
+    margin: 0;
+    padding: 0;
+    width: 7%;
+    background-color: #ABBAEA;
+    position: fixed;
+    height: 100%;
+    overflow: auto;
+}
+@media screen and (max-width: 700px) {
+    .sidebar {
+      width: 100%;
+      height: auto;
+      position: relative;
+    }
+    .sidebar a {float: left;}
+    div.content {margin-left: 0;}
+}
+.checkbox {
+    position: fixed;
+    bottom: 0;
+    margin-bottom: 10px;
 }
