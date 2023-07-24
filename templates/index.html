@@ -39,7 +39,7 @@
                 <input type="checkbox" id="materiale" name="objekt2" value="materiale">
                 <label for="materiale">Materiale/belegning</label><br>
             </div>
-            <div>
+            <div class="filters">
                 <label for="fylke">Fylke:</label>
                 <select id="fylke" name="fylke">
                     <option value=0> </option>
@@ -56,7 +56,7 @@
                     <option value=54>Troms og Finnmark</option>
                 </select>
                 <label for="kommune">Kommunenummer:</label>
-                <input type="text" id="kommune" name="kommune">
+                <input type="text" id="kommune" name="kommune" size="4">
                 <label for="vegkategori">Vegkategori:</label>
                 <select id="vegkategori" name="vegkategori">
                     <option value=0> </option>
@@ -68,9 +68,11 @@
                     <option value="sv">Skogsbilveg</option>
                 </select>
                 <label for="vegnummer">Vegnummer:</label>
-                <input type="text" id="vegnummer" name="vegnummer"><br>
+                <input type="text" id="vegnummer" name="vegnummer" size="4"><br>
                 <label for="filter">Filter:</label>
                 <input type="text" id="filter" name="filter"><br>
+            </div>
+            <div>
                 <button class="btn" type="submit" onclick="sendData()">Ferdig</button>
             </div>
         </form>

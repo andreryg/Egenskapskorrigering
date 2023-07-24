@@ -1,3 +1,8 @@
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
 .btn {
     height: 100px;
     background-color: #ABBAEA;
@@ -5,13 +10,32 @@
     font-size: 24px;
     font-family: Candara;
     font-weight: bold;
+    position: fixed;
+    bottom: 0;
+}
+
+.filters {
+    height: 100px;
+    bottom: 100px;
+    position: fixed;
+    width: 100%;
+    border-width: 2px;
+    border-style: solid;
 }
 
 .dank {
-    height: 100px;
-    background-color: #EBEBEB
+    height: 500px;
+    background-color: #EBEBEB;
+    border-width: 5px;
+    border-color: #ABBAEA;
+    border-style: double;
 }
 
 .box {
     display: none;
+    background-color: #EBEBEB;
+    height: 400;
+    border-width: 5px;
+    border-color: #ABBAEA;
+    border-style: double;
 }
