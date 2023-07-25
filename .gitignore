@@ -1,5 +1,6 @@
 pyvenv.cfg
 flask_session
+kanalisering.json
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

@@ -10,6 +10,7 @@ import nvdbapiv3
 import pandas as pd
 from flask_session import Session
 import json
+from createJSON import createEgenskapJSON
         
 app = Flask(__name__)
 app.config["SESSION_PERMANENT"] = False
@@ -71,7 +72,21 @@ def createJSON():
     print("inside function")
     data = eval(request.form["JSvar"])
     print(data)
-    
+    egenskaperIds = data.pop(0)
+    print(data)
+    jsons = []
+    for i in data:
+        jsons.append(createEgenskapJSON(i, egenskaperIds))
+    json_dict = {
+        "delviskorriger": {
+            "vegobjekter": jsons
+        },
+        "datakatalogversjon": "2.33"
+    }
+    fil = open("kanalisering.json", "w")
+    fil.write(json.dumps(json_dict, indent=4))
+    fil.close()
+
     return redirect('/')
 
 if __name__=="__main__":

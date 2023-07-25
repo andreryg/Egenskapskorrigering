@@ -1,7 +1,7 @@
 import datetime
 
 
-def createJSON(egenskaper):
+def createEgenskapJSON(egenskaper, egenskaperIds):
     startdato = egenskaper[2]
     nvdbId = egenskaper[0]
     versjon = egenskaper[1]
@@ -9,7 +9,7 @@ def createJSON(egenskaper):
     for i,v in enumerate(egenskaper[3:]):
         egenskaperListe.append(
             {
-            "typeId": 2080, #TODO
+            "typeId": egenskaperIds[i], 
             "verdi": [
                 v
                 ],
