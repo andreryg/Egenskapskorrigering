@@ -6,25 +6,35 @@
     </head>
     <body>
         <div class="sidebar">
+            <div class="count">
+                <span id="num"></span>
+                /
+                <span id="tot"></span>
+            </div>
             <div class="checkbox">
                 <input type="checkbox" id="vegbilder"><label for="vegbilder">Vegbilder</label>
             </div>
         </div>
         <div class=upper>
             <div class=first>
-                <button onclick = "Next();">Neste</button>
-                <form id="JSdata" action="/view" method="post">
-                    <input type="hidden" name="JSvar" id="JSvar" value="" />
-                    <button class="btn" type="submit">Lagre</button>
-                </form>    
+                <div class="left">
+                    <button class="btn" onclick = "Next();">Neste</button>
+                </div>
+                <div class="right">
+                    <form id="JSdata" action="/view" method="post" style="height: 100%;">
+                        <input type="hidden" name="JSvar" id="JSvar" value="" />
+                        <button class="btn" type="submit">Lagre</button>
+                    </form>  
+                </div>
+                  
                 
             </div>
             <div class=second>
-                <form>
+                <form style="height: 100%;">
                     <div id="egenskaper">
                         
                     </div>
-                    <button onclick = "ClearStorage();">Clear local storage</button>
+                    <button class="clearButton" onclick = "ClearStorage();">Reset</button>
                 </form>
             </div>
         </div>
@@ -100,6 +110,8 @@
             objekter = objekter.split("],[").map((value) => value.replaceAll("]", '').replaceAll("[", '').split(","))
             
             let i = localStorage.getItem("i") ? Number(localStorage.getItem("i")) : 0;
+            document.getElementById("num").innerHTML = i
+            document.getElementById("tot").innerHTML = objekter.length
             
             const nvdbObjekter = [
                 `16/hva:!(id~49)~/valgt:${objekter[i][0]}:37~/vegnett:metrering~+(detaljniva~!VT)`, 

@@ -8,32 +8,49 @@ div.upper, div.lower {
     right: 0;
 }
 div.upper {
-    height: 100px;
+    height: 16%;
     top: 0;
 }
 div.lower {
     bottom: 0;
-    height: 820px;
-
-    section{
-        display: none;
-        &.show{
-            display: table-cell;
-        }
-    }
+    height: 80%;
 }
 div.first{
-     position:absolute;
-     border:1px solid red;
-     text-align:center;
-     width:100%
+     width:100%;
+     height: 50%;
+}
+.btn {
+    height: 100%;
+    width: 100%;
 }
 div.second, div.third{
     text-align:center;
     width:100%;
-    height:30px;
-	position: relative;
-	top:40px;
+    height:50%;
+	
+    border-style: dashed;
+    overflow: overlay;
+}
+.right, .left {
+    height: 100%;
+    width: 49%;
+    border-style: solid;
+    margin-left: 0.1%;
+}
+.right {
+    margin-left: 50%;
+    border-color: blueviolet;
+}
+.left {
+    float: left;
+    border-color: black;
+}
+.clearButton {
+    width: 10%;
+    height: 50%;
+    right: 0;
+    position: absolute;
+    margin-right: 0.7%;
 }
 .sidebar {
     margin: 0;
@@ -57,4 +74,12 @@ div.second, div.third{
     position: fixed;
     bottom: 0;
     margin-bottom: 10px;
+}
+
+.count {
+    text-align: center;
+    border-width: 3px;
+    border-color: #EBEBEB;
+    border-style: double;
+    font-size: 25px;
 }
