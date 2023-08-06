@@ -4,7 +4,7 @@
             "src": "api/app.py",
             "use": "@vercel/python",
             "config": {
-                "includeFiles": ["createJSON.py"]
+                "includeFiles": ["api/createJSON.py"]
             }
         }
     ],
