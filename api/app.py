@@ -18,6 +18,8 @@ app.wsgi_app = WhiteNoise(app.wsgi_app, root="static/")
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
+objekter_array = []
+egenskaper = []
 
 
 @app.route('/')
@@ -56,17 +58,12 @@ def getData():
     objekt = "objekt" + request.form['objekt']
     egenskaper = [request.form['objekt']]
     egenskaper += request.form.getlist(objekt)
-    session["egenskaper"] = egenskaper
-    session["objekter"] = objekter_array
     if request.method == "POST":
         return redirect(url_for('view'))
     
 @app.route('/view')
-def view():
-    egenskaper = session["egenskaper"]
-    objekter = session["objekter"]
-    
-    return render_template('view.html', objekter=json.dumps({'list':objekter.tolist()}), egenskaper=egenskaper)
+def view():    
+    return render_template('view.html', objekter=json.dumps({'list':objekter_array.tolist()}), egenskaper=egenskaper)
 
 @app.route('/view', methods=['POST', 'GET'])
 def createJSONs():
