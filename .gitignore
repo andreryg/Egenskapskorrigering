@@ -1,5 +1,5 @@
 pyvenv.cfg
-api/flask_session
+flask_session
 kanalisering.json
 api/kanalisering.json
 

@@ -1,9 +1,9 @@
 {
     "builds": [
         {
-            "src": "index.py",
+            "src": "api/app.py",
             "use": "@vercel/python",
-            "config": { "maxLambdaSize": "15mb", "wsgiApplicationName": "app", "runtime": "python3.9" }
+            "config": { "maxLambdaSize": "15mb", "runtime": "python3.9" }
         }
     ],
     "routes": [

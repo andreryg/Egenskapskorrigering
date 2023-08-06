@@ -67,7 +67,7 @@ def view():
     return render_template('view.html', objekter=json.dumps({'list':objekter.tolist()}), egenskaper=egenskaper)
 
 @app.route('/view', methods=['POST', 'GET'])
-def createJSON():
+def createJSONs():
     session.clear()
     print("inside function")
     data = eval(request.form["JSvar"])
