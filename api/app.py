@@ -8,7 +8,7 @@ Created on Wed Jul 12 09:01:47 2023
 from flask import Flask, render_template, request, redirect, url_for, session
 import nvdbapiv3
 import pandas as pd
-from flask_session import Session
+import numpy as np
 import json
 #from createJSON import createEgenskapJSON
 from whitenoise import WhiteNoise
@@ -17,8 +17,7 @@ app = Flask(__name__)
 app.wsgi_app = WhiteNoise(app.wsgi_app, root="static/")
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
-Session(app)
-objekter_array = []
+objekter_array = np.array([])
 egenskaper = []
 
 
@@ -50,20 +49,25 @@ def getData():
     print(objekterDF['vegkategori'].head())
     #objekterDF = objekterDF.assign(geometri = lambda x: str(x['geometri']).strip("POINTZ()")[3:].split(" "))
     print(objekterDF.columns.values.tolist())
+    global objekter_array
     objekter_array = objekterDF[['nvdbId', 'versjon', 'startdato', 'geometri']].to_numpy()
     
     for x in objekter_array:
         x[-1] = x[-1].strip("POINTZ()")[3:].split(" ")[0:2]
     print(objekter_array[0])
     objekt = "objekt" + request.form['objekt']
+    global egenskaper
     egenskaper = [request.form['objekt']]
     egenskaper += request.form.getlist(objekt)
     if request.method == "POST":
         return redirect(url_for('view'))
     
 @app.route('/view')
-def view():    
-    return render_template('view.html', objekter=json.dumps({'list':objekter_array.tolist()}), egenskaper=egenskaper)
+def view():
+    if objekter_array.any():
+        return render_template('view.html', objekter=json.dumps({'list':objekter_array.tolist()}), egenskaper=egenskaper)
+    else:
+        redirect('/')
 
 @app.route('/view', methods=['POST', 'GET'])
 def createJSONs():
@@ -87,7 +91,6 @@ def createJSONs():
     fil.close()
 
     return redirect('/')
-"""
+
 if __name__=="__main__":
     app.run(debug=True)
-"""
