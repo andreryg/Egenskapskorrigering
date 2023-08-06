@@ -10,7 +10,7 @@ import nvdbapiv3
 import pandas as pd
 from flask_session import Session
 import json
-from createJSON import createEgenskapJSON
+#from createJSON import createEgenskapJSON
 from whitenoise import WhiteNoise
         
 app = Flask(__name__)
@@ -77,8 +77,8 @@ def createJSONs():
     egenskaperIds = data.pop(0)
     print(data)
     jsons = []
-    for i in data:
-        jsons.append(createEgenskapJSON(i, egenskaperIds))
+    """for i in data:
+        jsons.append(createEgenskapJSON(i, egenskaperIds))"""
     json_dict = {
         "delviskorriger": {
             "vegobjekter": jsons
