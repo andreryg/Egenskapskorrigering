@@ -63,8 +63,8 @@ def getData():
     
 @app.route('/view')
 def view():
-    objekter = session["objekter"]
     egenskaper = session["egenskaper"]
+    objekter = session["objekter"]
     
     return render_template('view.html', objekter=json.dumps({'list':objekter.tolist()}), egenskaper=egenskaper)
 
