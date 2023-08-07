@@ -87,7 +87,7 @@ def createJSONs():
         },
         "datakatalogversjon": "2.33"
     }
-    fil = open(os.path.join(str(Path.home() / "Downloads"),"kanalisering.json"), "w")
+    fil = open("kanalisering.json", "w")
     fil.write(json.dumps(json_dict, indent=4))
     fil.close()
 
