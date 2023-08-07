@@ -5,7 +5,7 @@ Created on Wed Jul 12 09:01:47 2023
 @author: andryg
 """
 
-from flask import Flask, render_template, request, redirect, url_for, session
+from flask import Flask, render_template, request, redirect, url_for
 import nvdbapiv3
 import pandas as pd
 import numpy as np
@@ -71,7 +71,6 @@ def view():
 
 @app.route('/view', methods=['POST', 'GET'])
 def createJSONs():
-    session.clear()
     print("inside function")
     data = eval(request.form["JSvar"])
     print(data)
