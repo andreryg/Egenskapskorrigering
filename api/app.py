@@ -10,11 +10,13 @@ import nvdbapiv3
 import pandas as pd
 import numpy as np
 import json
+import os
+from pathlib import Path
 #from createJSON import createEgenskapJSON
-from whitenoise import WhiteNoise
+#from whitenoise import WhiteNoise
         
 app = Flask(__name__)
-app.wsgi_app = WhiteNoise(app.wsgi_app, root="static/")
+#app.wsgi_app = WhiteNoise(app.wsgi_app, root="static/")
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 objekter_array = np.array([])
@@ -85,7 +87,7 @@ def createJSONs():
         },
         "datakatalogversjon": "2.33"
     }
-    fil = open("kanalisering.json", "w")
+    fil = open(os.path.join(str(Path.home() / "Downloads"),"kanalisering.json"), "w")
     fil.write(json.dumps(json_dict, indent=4))
     fil.close()
 
