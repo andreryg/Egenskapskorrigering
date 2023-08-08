@@ -1,10 +1,9 @@
 <body>
-  <h1 id="header">{{ message }}</h1>
+    <code class="prettyprint" id="json" style="white-space: pre-wrap">
+    </code>
+  <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
   <script>
-    var heading = $("#header");
-    setInterval(function() {
-      if (heading.style.display == "block") { heading.style.display = "none"; }
-      else if (heading.style.display == "none") { heading.style.display = "block"; }
-    }, 1000);
+    const msg = eval('('+{{ message|safe }}+')')
+    document.getElementById("json").innerHTML = JSON.stringify(msg, null, 4)
   </script>
 </body>
