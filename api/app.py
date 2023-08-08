@@ -88,11 +88,11 @@ def createJSONs():
         "datakatalogversjon": "2.33"
     }
     
-    with open("kanalisering.json", "w") as f:
+    with open("C:/kanalisering.json", "w") as f:
         f.write(json.dumps(json_dict, indent=4))
         f.close()
     
-    return send_file("kanalisering.json", as_attachment=True)
+    return send_file("C:/kanalisering.json", as_attachment=True)
     #return redirect('/')
 
 if __name__=="__main__":
