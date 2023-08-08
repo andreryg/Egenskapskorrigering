@@ -5,7 +5,7 @@ Created on Wed Jul 12 09:01:47 2023
 @author: andryg
 """
 
-from flask import Flask, render_template, request, redirect, url_for, send_file, flash
+from flask import Flask, render_template, request, redirect, url_for, send_file, request
 import nvdbapiv3
 import pandas as pd
 import numpy as np
@@ -87,13 +87,17 @@ def createJSONs():
         },
         "datakatalogversjon": "2.33"
     }
-    flash(json.dumps(json_dict, indent=4))
     """with open("data/kanalisering.json", "w") as f:
         f.write(json.dumps(json_dict, indent=4))
         f.close()
     
     return send_file("data/kanalisering.json", as_attachment=True)"""
-    return redirect('/')
+    return redirect(url_for('.flash', message=json_dict))
+
+@app.route('/flash')
+def flash():
+    message = json.dumps(request.args.get("message"), indent=4)
+    return render_template('flash.html', message=message)
 
 if __name__=="__main__":
     app.run(debug=True)
