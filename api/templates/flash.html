@@ -1,9 +1,23 @@
+<head>
+    <title>Json</title>
+    <link rel="stylesheet" href="../static/flash.css">
+    <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+</head>
 <body>
-    <code class="prettyprint" id="json" style="white-space: pre-wrap">
-    </code>
-  <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+    <div class="tssk">
+        <a href="https://nvdbapiskriv.atlas.vegvesen.no/generator/#" target="_blank">NVDB Generator</a>
+        <button onclick="copy()">Kopier</button>
+        <a href="/" >Hjem</a>
+    </div>
+    <div class="prettyprint" id="json" style="white-space: pre-wrap">
+    </div>
   <script>
     const msg = eval('('+{{ message|safe }}+')')
     document.getElementById("json").innerHTML = JSON.stringify(msg, null, 4)
+    
+    function copy() {
+        var copyText = document.getElementById("json").innerHTML
+        navigator.clipboard.writeText(copyText)
+    }
   </script>
 </body>
