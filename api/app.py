@@ -10,7 +10,7 @@ import nvdbapiv3
 import pandas as pd
 import numpy as np
 import json
-from .. import createJSON
+import createJSON
 #from whitenoise import WhiteNoise
         
 app = Flask(__name__)
