@@ -5,12 +5,12 @@ Created on Wed Jul 12 09:01:47 2023
 @author: andryg
 """
 
-from flask import Flask, render_template, request, redirect, url_for, send_file
+from flask import Flask, render_template, request, redirect, url_for
 import nvdbapiv3
 import pandas as pd
 import numpy as np
 import json
-from _createJSON import createEgenskapJSON
+from .. import createJSON
 #from whitenoise import WhiteNoise
         
 app = Flask(__name__)
@@ -78,7 +78,7 @@ def createJSONs():
     print(data)
     jsons = []
     for i in data:
-        jsons.append(createEgenskapJSON(i, egenskaperIds))
+        jsons.append(createJSON.createEgenskapJSON(i, egenskaperIds))
     json_dict = {
         "delvisKorriger": {
             "vegobjekter": jsons
