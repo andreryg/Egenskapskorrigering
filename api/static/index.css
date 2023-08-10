@@ -21,6 +21,7 @@ html, body {
     width: 100%;
     border-width: 2px;
     border-style: solid;
+    padding: 1%
 }
 
 .dank {

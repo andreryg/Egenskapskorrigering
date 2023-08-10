@@ -10,7 +10,10 @@ import nvdbapiv3
 import pandas as pd
 import numpy as np
 import json
-import createJSON
+try: 
+    from createJSON import createEgenskapJSON
+except ImportError:
+    pass
         
 app = Flask(__name__)
 app.config["SESSION_PERMANENT"] = False
@@ -62,7 +65,7 @@ def createJSONs():
     egenskaperIds = data.pop(0)
     jsons = []
     for i in data:
-        jsons.append(createJSON.createEgenskapJSON(i, egenskaperIds))
+        jsons.append(createEgenskapJSON(i, egenskaperIds))
     json_dict = {
         "delvisKorriger": {
             "vegobjekter": jsons
