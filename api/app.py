@@ -30,16 +30,19 @@ def home():
 def getData():
     nvdbObjekter = [37, 46, 103] #ADD NVDB ID
     objekter = nvdbapiv3.nvdbFagdata((nvdbObjekter[int(request.form['objekt'])]))
-    
-    if request.form['kommune'] != "":
-        objekter.filter({'kommune':int(request.form['kommune'])})
-    elif request.form['fylke'] != "0":
-        objekter.filter({'fylke':int(request.form['fylke'])})
-    if request.form['vegkategori'] != "0":
-        objekter.filter({'vegsystemreferanse':request.form['vegkategori']+request.form['vegnummer']})
-    if request.form['filter'] != "":
-        objekter.filter({'egenskap':request.form['filter']})
-    objekterDF = pd.DataFrame(objekter.to_records()).sort_values(by=['vref']).reset_index(drop=True)
+    try:
+        if request.form['kommune'] != "":
+            objekter.filter({'kommune':int(request.form['kommune'])})
+        elif request.form['fylke'] != "0":
+            objekter.filter({'fylke':int(request.form['fylke'])})
+        if request.form['vegkategori'] != "0":
+            objekter.filter({'vegsystemreferanse':request.form['vegkategori']+request.form['vegnummer']})
+        if request.form['filter'] != "":
+            objekter.filter({'egenskap':request.form['filter']})
+        objekterDF = pd.DataFrame(objekter.to_records()).sort_values(by=['vref']).reset_index(drop=True)
+    except:
+        return redirect('/')
+        
     global objekter_array
     objekter_array = objekterDF[['nvdbId', 'versjon', 'startdato', 'geometri']].to_numpy()
     
