@@ -5,14 +5,12 @@ Created on Wed Jul 12 09:01:47 2023
 @author: andryg
 """
 
-from flask import Flask, render_template, request, redirect, url_for, send_file, request
+from flask import Flask, render_template, request, redirect, url_for, send_file
 import nvdbapiv3
 import pandas as pd
 import numpy as np
 import json
-import os
-from pathlib import Path
-from createJSON import createEgenskapJSON
+from _createJSON import createEgenskapJSON
 #from whitenoise import WhiteNoise
         
 app = Flask(__name__)
