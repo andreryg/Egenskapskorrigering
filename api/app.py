@@ -12,7 +12,7 @@ import numpy as np
 import json
 import os
 from pathlib import Path
-#from createJSON import createEgenskapJSON
+from createJSON import createEgenskapJSON
 #from whitenoise import WhiteNoise
         
 app = Flask(__name__)
@@ -79,10 +79,10 @@ def createJSONs():
     egenskaperIds = data.pop(0)
     print(data)
     jsons = []
-    """for i in data:
-        jsons.append(createEgenskapJSON(i, egenskaperIds))"""
+    for i in data:
+        jsons.append(createEgenskapJSON(i, egenskaperIds))
     json_dict = {
-        "delviskorriger": {
+        "delvisKorriger": {
             "vegobjekter": jsons
         },
         "datakatalogversjon": "2.33"

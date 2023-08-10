@@ -3,13 +3,13 @@ import datetime
 
 def createEgenskapJSON(egenskaper, egenskaperIds):
     startdato = egenskaper[2]
-    nvdbId = egenskaper[0]
+    nvdbId = int(egenskaper[0])
     versjon = egenskaper[1]
     egenskaperListe = []
     for i,v in enumerate(egenskaper[3:]):
         egenskaperListe.append(
             {
-            "typeId": egenskaperIds[i], 
+            "typeId": int(egenskaperIds[i]), 
             "verdi": [
                 v
                 ],
