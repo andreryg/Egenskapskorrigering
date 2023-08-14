@@ -96,9 +96,7 @@
             
             var egenskaper = '{{ egenskaper }}'
             var egenskaper = egenskaper.replaceAll("&#39;", '"')
-            console.log(egenskaper)
             var egenskaper = eval(egenskaper) 
-            console.log(egenskaper)
             
             for(var j=1; j<egenskaper.length; j++){
                 eval(egenskaperForm[egenskaper[j]])
@@ -119,9 +117,6 @@
                 `16/hva:!(id~103)~/vegnett:metrering~+(detaljniva~!VT)~/valgt:${objekter[i][0]}:103`
                 ]
                 
-            console.log(nvdbObjekter)
-            console.log(typeof egenskaper)
-            console.log(egenskaper)
             var link = `https://vegkart.atlas.vegvesen.no/#kartlag:nib/@${objekter[i][3]},${objekter[i][4]},${nvdbObjekter[egenskaper[0]]}~`;
             const Kart = document.getElementById("Kart");
             console.log(link)
@@ -171,13 +166,7 @@
                 link.download = "verdier.txt"
                 link.click()
                 URL.revokeObjectURL(link.href)
-                
             }
-            window.addEventListener("keypress", function(event) {
-                if (event.key === "Enter") {
-                    document.getElementById("armverdi").focus();
-                }
-            })
         </script>
     </body>
 </html>
