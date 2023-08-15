@@ -18,9 +18,13 @@ except ImportError:
         
 app = Flask(__name__)
 app.config["SESSION_PERMANENT"] = False
+print(1)
 app.config["SESSION_TYPE"] = "filesystem"
+print(2)
 app.config["SECRET_KEY"] = "topSecret"
+print(3)
 app.secret_key = "AlsoTopSecret"
+print(4)
 Session(app)
 
 
