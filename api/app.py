@@ -71,6 +71,7 @@ def getData():
 def view():
     objekter_array = session.get("obj")
     egenskaper = session.get("egenskaper")
+    session["dank"] = "dank"
     if objekter_array is not None:
         return render_template('view.html', objekter=json.dumps({'list':objekter_array.tolist()}), egenskaper=egenskaper)
     else:
