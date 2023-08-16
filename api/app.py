@@ -11,6 +11,7 @@ import nvdbapiv3
 import pandas as pd
 import numpy as np
 import json
+import time
 try: 
     from createJSON import createEgenskapJSON
 except ImportError:
@@ -59,6 +60,7 @@ def getData():
     egenskaper = [request.form['objekt']]
     egenskaper += request.form.getlist(objekt)
     session["egenskaper"] = egenskaper
+    time.sleep(10)
     
     if request.method == "POST":
         print("obj" in session)
