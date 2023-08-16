@@ -12,6 +12,7 @@ import pandas as pd
 import numpy as np
 import json
 import time
+import logging
 try: 
     from createJSON import createEgenskapJSON
 except ImportError:
@@ -19,13 +20,13 @@ except ImportError:
         
 app = Flask(__name__)
 app.config["SESSION_PERMANENT"] = False
-print(1)
+logging.info("1")
 app.config["SESSION_TYPE"] = "filesystem"
-print(2)
+logging.info("2")
 app.config["SECRET_KEY"] = "topSecret"
-print(3)
+logging.info("3")
 app.secret_key = "AlsoTopSecret"
-print(4)
+logging.info("4")
 Session(app)
 
 
@@ -70,7 +71,7 @@ def getData():
 def view():
     objekter_array = session.get("obj")
     egenskaper = session.get("egenskaper")
-    if objekter_array.any():
+    if objekter_array is not None:
         return render_template('view.html', objekter=json.dumps({'list':objekter_array.tolist()}), egenskaper=egenskaper)
     else:
         redirect('/')
