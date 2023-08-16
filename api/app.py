@@ -60,7 +60,7 @@ def getData():
     egenskaper = [request.form['objekt']]
     egenskaper += request.form.getlist(objekt)
     session["egenskaper"] = egenskaper
-    time.sleep(10)
+    time.sleep(5)
     
     if request.method == "POST":
         print("obj" in session)
