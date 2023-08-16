@@ -5,14 +5,11 @@ Created on Wed Jul 12 09:01:47 2023
 @author: andryg
 """
 
-from flask import Flask, render_template, request, redirect, url_for, session
-from flask_session import Session
+from flask import Flask, render_template, request, redirect, url_for
 import nvdbapiv3
 import pandas as pd
 import numpy as np
 import json
-import time
-import logging
 try: 
     from createJSON import createEgenskapJSON
 except ImportError:
@@ -20,15 +17,13 @@ except ImportError:
         
 app = Flask(__name__)
 app.config["SESSION_PERMANENT"] = False
-logging.info("1")
 app.config["SESSION_TYPE"] = "filesystem"
-logging.info("2")
-app.config["SECRET_KEY"] = "topSecret"
-logging.info("3")
-app.secret_key = "AlsoTopSecret"
-logging.info("4")
-Session(app)
-
+try: 
+    objekter_array
+    egenskaper
+except NameError:
+    objekter_array = np.array([])
+    egenskaper = []
 
 @app.route('/')
 def home():
@@ -50,28 +45,24 @@ def getData():
         objekterDF = pd.DataFrame(objekter.to_records()).sort_values(by=['vref']).reset_index(drop=True)
     except:
         return redirect('/')
-        
+    
+    global objekter_array
     objekter_array = objekterDF[['nvdbId', 'versjon', 'startdato', 'geometri']].to_numpy()
     for x in objekter_array:
         x[-1] = x[-1].strip("POINTZ()")[3:].split(" ")[0:2]
-        
-    session["obj"] = objekter_array
+    
     
     objekt = "objekt" + request.form['objekt']
+    
+    global egenskaper
     egenskaper = [request.form['objekt']]
     egenskaper += request.form.getlist(objekt)
-    session["egenskaper"] = egenskaper
-    time.sleep(5)
     
     if request.method == "POST":
-        print("obj" in session)
         return redirect(url_for('view'))
     
 @app.route('/view')
 def view():
-    objekter_array = session.get("obj")
-    egenskaper = session.get("egenskaper")
-    session["dank"] = "dank"
     if objekter_array is not None:
         return render_template('view.html', objekter=json.dumps({'list':objekter_array.tolist()}), egenskaper=egenskaper)
     else:
