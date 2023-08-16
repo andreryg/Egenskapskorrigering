@@ -74,7 +74,9 @@ def createJSONs():
     egenskaperIds = data.pop(0)
     jsons = []
     for i in data:
-        jsons.append(createEgenskapJSON(i, egenskaperIds))
+        if i[-1] != "":
+            print("dank")
+            jsons.append(createEgenskapJSON(i, egenskaperIds))
     json_dict = {
         "delvisKorriger": {
             "vegobjekter": jsons

@@ -71,15 +71,15 @@
             }
             
             let egenskaperForm = {
-                vegkryss_type: 'addLabel(" Type: ");addSelectInput(["Plankryss", "T-kryss", "X-kryss", "Rundkjøring", "Planskilt kryss", "Planskilt kryss, trompetkryss", "Planskilt kryss, ruterkryss", "Planskilt kryss, kløverbladkryss", "Planskilt kryss, hankkryss"], "vegkryss_type")',
+                vegkryss_type: 'addLabel(" Type: ");addSelectInput(["Plankryss", "T-kryss", "X-kryss", "Rundkjøring", "Planskilt kryss", "Planskilt kryss, trompetkryss", "Planskilt kryss, ruterkryss", "Planskilt kryss, kløverbladkryss", "Planskilt kryss, hankkryss", ""], "vegkryss_type")',
                 kryssnummer: 'addLabel(" Kryssnummer: "); addIntInput(1, 1000, "kryssnummer")',
                 armer: 'addLabel(" Armer i rundkjøring: "); addIntInput(1, 8, "armer")',
-                kanalisering1: 'addLabel(" Kanalisering primærveg: ");addSelectInput(["Ingen", "Malt", "Fysisk m kantstein"], "kanalisering1")',
-                kanalisering2: 'addLabel(" Kanalisering sekundærveger: ");addSelectInput(["Ingen", "Malt", "Fysisk m kantstein", "Ulik kanalisering"], "kanalisering2")',
-                bruksområde: 'addLabel(" Bruksområde: ");addSelectInput(["-Ingen-", "Bolig", "Hytte", "Gardsbruk", "Dyrkamark/jordbruk", "Skog/skogbruk", "Forretning", "Industri", "Service", "Skole/Barnehage", "Fritidsaktivitet", "Naust"], "bruksområde")',
-                primæraktivitet: 'addLabel(" Primæraktivitet: ");addSelectInput(["-Ingen-", "1-2leiligheter", "3-5 leiligheter", "6-10 leiligheter", "> 10 leiligheter", "1-2 hytter", "3-5 hytter", "> 5 hytter", "1 gardsbruk i drift", "2-3 gardsbruk i drift", "Nedlagt gardsbruk", "Beiteområde/dyrehold", "Jord/grustak", "Grustak/steinbrudd", "Tømmeropplagring/velteplass", "Liten forretning", "Middels landhandel", "Stort forretningssenter", "Kiosk/gatekjøkken", "Hotell < 50 plasser", "Hotell > 50 plasser", "Bensinstasjon, bilverksted", "Sykehus < 50 plasser", "Sykehus > 50 plasser", "Kirke/menighet/gravplass", "Samfunnshus/grendahus", "Stoppested kollektivtrafikk", "Parkering", "Utfartsplass, skitrekk", "Fritid, kino", "Lekeplass/løkke"], "primæraktivitet")',   
-                fartsdemper_type: 'addLabel(" Type: ");addSelectInput(["Fartshump", "Fartsputer", "Busshump", "Trafikkøy", "Innsnevring", "Sideforskyvning", "Innsnevring og sideforskyvning", "Rumlefelt", "Fortausutvidelse i kryss", "Fartsdump"], "fartsdemper_type")',
-                materiale: 'addLabel("Materiale/belegning");addSelectInput(["Stein, brostein", "Asfalt", "Betongstein", "Betong, prefabrikkert"], "materiale")',
+                kanalisering1: 'addLabel(" Kanalisering primærveg: ");addSelectInput(["Ingen", "Malt", "Fysisk m kantstein", ""], "kanalisering1")',
+                kanalisering2: 'addLabel(" Kanalisering sekundærveger: ");addSelectInput(["Ingen", "Malt", "Fysisk m kantstein", "Ulik kanalisering", ""], "kanalisering2")',
+                bruksområde: 'addLabel(" Bruksområde: ");addSelectInput(["", "Bolig", "Hytte", "Gardsbruk", "Dyrkamark/jordbruk", "Skog/skogbruk", "Forretning", "Industri", "Service", "Skole/Barnehage", "Fritidsaktivitet", "Naust"], "bruksområde")',
+                primæraktivitet: 'addLabel(" Primæraktivitet: ");addSelectInput(["", "1-2leiligheter", "3-5 leiligheter", "6-10 leiligheter", "> 10 leiligheter", "1-2 hytter", "3-5 hytter", "> 5 hytter", "1 gardsbruk i drift", "2-3 gardsbruk i drift", "Nedlagt gardsbruk", "Beiteområde/dyrehold", "Jord/grustak", "Grustak/steinbrudd", "Tømmeropplagring/velteplass", "Liten forretning", "Middels landhandel", "Stort forretningssenter", "Kiosk/gatekjøkken", "Hotell < 50 plasser", "Hotell > 50 plasser", "Bensinstasjon, bilverksted", "Sykehus < 50 plasser", "Sykehus > 50 plasser", "Kirke/menighet/gravplass", "Samfunnshus/grendahus", "Stoppested kollektivtrafikk", "Parkering", "Utfartsplass, skitrekk", "Fritid, kino", "Lekeplass/løkke"], "primæraktivitet")',   
+                fartsdemper_type: 'addLabel(" Type: ");addSelectInput(["", "Fartshump", "Fartsputer", "Busshump", "Trafikkøy", "Innsnevring", "Sideforskyvning", "Innsnevring og sideforskyvning", "Rumlefelt", "Fortausutvidelse i kryss", "Fartsdump"], "fartsdemper_type")',
+                materiale: 'addLabel("Materiale/belegning");addSelectInput(["", "Stein, brostein", "Asfalt", "Betongstein", "Betong, prefabrikkert"], "materiale")',
             };
 
             let egenskaperIdForm = {
@@ -157,15 +157,6 @@
                 link = `https://vegkart.atlas.vegvesen.no/#kartlag:nib/@${objekter[i][3]},${objekter[i][4]},${nvdbObjekter[egenskaper[0]]}~`;
                 Kart.src = link
                 location.reload()
-            }
-            function createJSON() {
-                var verdier = localStorage.getItem("verdier") ? JSON.parse(localStorage.getItem("verdier")) : []
-                const link = document.createElement("a")
-                const file = new Blob([JSON.stringify(verdier)], { type: 'text/plain' })
-                link.href = URL.createObjectURL(file)
-                link.download = "verdier.txt"
-                link.click()
-                URL.revokeObjectURL(link.href)
             }
         </script>
     </body>
